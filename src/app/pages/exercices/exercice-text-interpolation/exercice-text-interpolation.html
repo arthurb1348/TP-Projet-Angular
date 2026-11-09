@@ -1,0 +1,28 @@
+<div>
+    <h1 class="text-4xl font-extrabold text-primary">Exercice 1: Interpolation de Texte</h1>
+</div>
+<div class="card bg-base-200 shadow-xl border border-base-300 mt-4">
+    <div class="card-body">
+        <h2 class="card-title text-secondary">✨ 1. Types primitifs</h2>
+        <p class="text-sm text-base-content/70">Note maximale : {{ maxScore }}</p>
+        <p class="text-sm text-base-content/70">Note actuelle : {{ currentScore }}</p>
+        <p class="text-sm text-base-content/70">Pourcentage : {{ (currentScore / maxScore * 100) }}%</p>
+    </div>
+</div>   
+<div class="card bg-base-200 shadow-xl border border-base-300 mt-4">
+    <div class="card-body">
+        <h2 class="card-title text-secondary">🔍 2. Objet & Méthode</h2>
+        <p class="text-sm text-base-content/70">Role : {{ user.role }}</p>
+        <p class="text-sm text-base-content/70">Nom complet : {{ getFullName() }}</p>
+        <p class="text-sm text-base-content/70">Statut : {{ isLoggedIn ? 'Connecté' : 'Déconnecté' }}.</p>
+    </div>
+</div>
+<div class="card bg-base-200 shadow-xl border border-base-300 mt-4">
+    <div class="card-body">
+        <h2 class="card-title text-secondary">🎨 3. Tableaux</h2>
+        <ul class="list-disc list-inside text-sm text-base-content/70">
+            <li>Premiere compétence : {{ skills[0] }}</li>
+            <li>Toutes les compétences : {{ skills.join(' • ') }}</li>
+        </ul>
+    </div>
+</div>

@@ -20,5 +20,9 @@ export const routes: Routes = [
     {
         path: 'exercice-text-interpolation',
         loadComponent: () => import('./pages/exercices/exercice-text-interpolation/exercice-text-interpolation').then((m) => m.ExerciceTextInterpolation),
+    },
+    {
+        path: 'correction-text-interpolation',
+        loadComponent: () => import('./pages/corrections/text-interpolation-exercice/text-interpolation-exercice').then((m) => m.TextInterpolationExercice),
     }
 ];

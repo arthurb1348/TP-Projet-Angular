@@ -42,6 +42,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/exercices/property-binding-exercice/property-binding-exercice').then((m) => m.PropertyBindingExercice),
     },
     {
+        path: 'exercice-event-binding',
+        loadComponent: () => import('./pages/exercices/event-binding-exercice/event-binding-exercice').then((m) => m.EventBindingExercice),
+    },
+    {
         path: 'correction-text-interpolation',
         loadComponent: () => import('./pages/corrections/text-interpolation-exercice/text-interpolation-exercice').then((m) => m.TextInterpolationExercice),
     },

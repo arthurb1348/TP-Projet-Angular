@@ -1,0 +1,24 @@
+<section class="p-4">
+    <h1 class="text-2xl font-bold mb-4">Exercice de liaison d’événements</h1>
+
+    <label for="friend-name">Nom de l’ami</label>
+    <input
+        id="friend-name"
+        type="text"
+        placeholder="Tapez le nom de votre ami..."
+        class="input input-bordered w-full max-w-md"
+        (input)="onUpdateFriendsList($event)"
+    >
+
+    <p>Nom saisi : {{ listFriendsInputText }}</p>
+    <p>Statut : {{ listFriendsCreationStatus }}</p>
+
+    <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onAddingFriends()"
+        [disabled]="!listFriendsAuth"
+    >
+        Ajouter cet ami
+    </button>
+</section>

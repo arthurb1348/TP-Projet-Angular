@@ -24,5 +24,9 @@ export const routes: Routes = [
     {
         path: 'correction-text-interpolation',
         loadComponent: () => import('./pages/corrections/text-interpolation-exercice/text-interpolation-exercice').then((m) => m.TextInterpolationExercice),
+    },
+    {
+        path: 'attributes-binding-lesson',
+        loadComponent: () => import('./pages/lessons/attributes-binding-lesson/attributes-binding-lesson').then((m) => m.AttributesBindingLesson),
     }
 ];

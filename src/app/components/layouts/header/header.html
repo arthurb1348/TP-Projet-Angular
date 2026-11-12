@@ -1,28 +1,131 @@
-<div class="bg-gray-800 text-white p-4">
-    <nav>
-        <ul>
-            <li><a routerLink="/home">Lien Vers Home</a></li>
-            <li><a routerLink="/about">Lien Vers About</a></li>
+<header class="relative z-10 border-b border-base-300 bg-base-100">
+    <nav
+        class="navbar mx-auto max-w-6xl flex-col items-start gap-2 px-4 sm:flex-row sm:flex-wrap sm:items-center"
+        aria-label="Navigation principale"
+    >
+        <div class="flex gap-1">
+            <a class="btn btn-ghost" routerLink="/home">Home</a>
+            <a class="btn btn-ghost" routerLink="/about">About</a>
+        </div>
 
-            <li><a routerLink="/text-interpolation-lesson">Lien Vers le cours sur l'Interpolation de Texte</a></li>
-            <li><a routerLink="/attributes-binding-lesson">Lien Vers le cours sur le Binding d'Attributs</a></li>
-            <li><a routerLink="/event-binding-lesson">Lien Vers le cours sur le Binding d'Événements</a></li>
-            <li><a routerLink="/two-way-binding-lesson">Lien Vers le cours sur le Binding à Deux Voies</a></li>
-            <li><a routerLink="/conditional-rendering-lesson">Lien Vers le cours sur le Rendu Conditionnel</a></li>
-            <li><a routerLink="/list-rendering-lesson">Lien Vers le cours sur le Rendu de Listes</a></li>
-            <li><a routerLink="/signals-lesson">Lien Vers le cours sur les Signaux</a></li>
+        <ul class="flex flex-col items-start gap-1 sm:flex-row sm:flex-wrap">
+            <li>
+                <details #lessonsMenu name="header-navigation" class="dropdown">
+                    <summary class="btn btn-ghost">
+                        Leçons <span aria-hidden="true">▾</span>
+                    </summary>
 
-            <li><a routerLink="/exercice-text-interpolation">Lien Vers l'exercice sur l'Interpolation de Texte</a></li>
-            <li><a routerLink="/exercice-property-binding">Lien Vers l'exercice sur le Binding de Propriétés</a></li>
-            <li><a routerLink="/exercice-event-binding">Lien Vers l'exercice sur le Binding d'Événements</a></li>
-            <li><a routerLink="/exercice-conditional-rendering">Lien Vers l'exercice sur le Rendu Conditionnel</a></li>
-            <li><a routerLink="/exercice-dynamic-styling">Lien Vers l'exercice sur le Styling Dynamique</a></li>
-            <li><a routerLink="/signals-exercice">Lien Vers l'exercice sur les Signaux</a></li>
-            
-            <li><a routerLink="/correction-text-interpolation">Lien Vers la correction sur l'Interpolation de Texte</a></li>
-            <li><a routerLink="/correction-property-binding">Lien Vers la correction sur le Binding de Propriétés</a></li>
-            <li><a routerLink="/correction-event-binding">Lien Vers la correction sur le Binding d'Événements</a></li>
-            <li><a routerLink="/correction-conditional-rendering">Lien Vers la correction sur le Rendu Conditionnel</a></li>
+                    <ul class="dropdown-content menu z-10 mt-2 w-64 rounded-box border border-base-300 bg-base-100 p-2 shadow-lg">
+                        <li>
+                            <a routerLink="/text-interpolation-lesson" (click)="lessonsMenu.open = false">
+                                Interpolation de texte
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/attributes-binding-lesson" (click)="lessonsMenu.open = false">
+                                Binding d’attributs
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/event-binding-lesson" (click)="lessonsMenu.open = false">
+                                Binding d’événements
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/two-way-binding-lesson" (click)="lessonsMenu.open = false">
+                                Binding à deux voies
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/conditional-rendering-lesson" (click)="lessonsMenu.open = false">
+                                Rendu conditionnel
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/list-rendering-lesson" (click)="lessonsMenu.open = false">
+                                Rendu de listes
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/signals-lesson" (click)="lessonsMenu.open = false">
+                                Signaux
+                            </a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+
+            <li>
+                <details #exercisesMenu name="header-navigation" class="dropdown">
+                    <summary class="btn btn-ghost">
+                        Exercices <span aria-hidden="true">▾</span>
+                    </summary>
+
+                    <ul class="dropdown-content menu z-10 mt-2 w-64 rounded-box border border-base-300 bg-base-100 p-2 shadow-lg">
+                        <li>
+                            <a routerLink="/exercice-text-interpolation" (click)="exercisesMenu.open = false">
+                                Interpolation de texte
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/exercice-property-binding" (click)="exercisesMenu.open = false">
+                                Binding de propriétés
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/exercice-event-binding" (click)="exercisesMenu.open = false">
+                                Binding d’événements
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/exercice-conditional-rendering" (click)="exercisesMenu.open = false">
+                                Rendu conditionnel
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/exercice-dynamic-styling" (click)="exercisesMenu.open = false">
+                                Style dynamique
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/signals-exercice" (click)="exercisesMenu.open = false">
+                                Signaux
+                            </a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
+
+            <li>
+                <details #correctionsMenu name="header-navigation" class="dropdown">
+                    <summary class="btn btn-ghost">
+                        Corrections <span aria-hidden="true">▾</span>
+                    </summary>
+
+                    <ul class="dropdown-content menu z-10 mt-2 w-64 rounded-box border border-base-300 bg-base-100 p-2 shadow-lg">
+                        <li>
+                            <a routerLink="/correction-text-interpolation" (click)="correctionsMenu.open = false">
+                                Interpolation de texte
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/correction-property-binding" (click)="correctionsMenu.open = false">
+                                Binding de propriétés
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/correction-event-binding" (click)="correctionsMenu.open = false">
+                                Binding d’événements
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/correction-conditional-rendering" (click)="correctionsMenu.open = false">
+                                Rendu conditionnel
+                            </a>
+                        </li>
+                    </ul>
+                </details>
+            </li>
         </ul>
     </nav>
-</div>
+</header>

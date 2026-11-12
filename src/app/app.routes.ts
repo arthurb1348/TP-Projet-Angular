@@ -13,6 +13,7 @@ export const routes: Routes = [
         path: 'home',
         loadComponent: () => import('./pages/home/home').then((m) => m.Home),
     },
+
     {
         path: 'text-interpolation-lesson',
         loadComponent: () => import('./pages/lessons/text-interpolation-lesson/text-interpolation-lesson').then((m) => m.TextInterpolationLesson),
@@ -34,6 +35,15 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/lessons/conditional-rendering-lesson/conditional-rendering-lesson').then((m) => m.ConditionalRenderingLesson), 
     },
     {
+        path: 'list-rendering-lesson',
+        loadComponent: () => import('./pages/lessons/list-rendering-lesson/list-rendering-lesson').then((m) => m.ListRenderingLesson),
+    },
+    {
+        path:'signals-lesson',
+        loadComponent:()=>import('./pages/lessons/signals-lesson/signals-lesson').then(m=>m.SignalsLesson)
+    },
+
+    {
         path: 'exercice-text-interpolation',
         loadComponent: () => import('./pages/exercices/exercice-text-interpolation/exercice-text-interpolation').then((m) => m.ExerciceTextInterpolation),
     },
@@ -49,6 +59,11 @@ export const routes: Routes = [
         path: 'exercice-conditional-rendering',
         loadComponent: () => import('./pages/exercices/conditional-rendering-exercice/conditional-rendering-exercice').then((m) => m.ConditionalRenderingExercice),
     },
+    {
+        path: 'exercice-dynamic-styling',
+        loadComponent: () => import('./pages/exercices/dynamic-styling/dynamic-styling').then((m) => m.DynamicStyling),
+    },
+
     {
         path: 'correction-text-interpolation',
         loadComponent: () => import('./pages/corrections/text-interpolation-exercice/text-interpolation-exercice').then((m) => m.TextInterpolationExercice),

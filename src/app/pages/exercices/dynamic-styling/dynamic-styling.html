@@ -1,0 +1,53 @@
+
+<div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-warning">Exercice de Styling Dynamique</h1>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+    <div [ngClass]="{ oldman: oneFriend.oneFriendAge >= 30 } "class="card bg-base-100 shadow-xl border-2 border-warning/40">
+        <div class="card-body space-y-4">
+
+            <ul class="list-disc list-inside text-sm text-base-content/70">
+                <li>Nom : {{ oneFriend.oneFriendName }}</li>
+                <li>Âge : {{ oneFriend.oneFriendAge }}</li>
+                <li [ngStyle]="{ color: oneFriend.oneFriendStatus === 'Offline' ? 'red' : 'green' }">Statut : {{ oneFriend.oneFriendStatus }}</li>
+                <li>Bio : {{ oneFriend.oneFriendBio }}</li>
+                <li>Image : <img [src]="oneFriend.oneFriendImgUrl" alt="{{ oneFriend.oneFriendName }}" class="w-16 h-16 rounded-full"></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<form class="mt-4 space-y-4">
+
+    <div>
+        <label for="name" class="block text-sm font-medium text-base-content/70">Changer le nom :</label>
+        <input type="text" id="name" [(ngModel)]="oneFriend.oneFriendName" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-warning focus:ring focus:ring-warning focus:ring-opacity-50">
+    </div>
+
+    <div>
+        <label for="age" class="block text-sm font-medium text-base-content/70">Changer l'âge :</label>
+        <input type="number" id="age" [(ngModel)]="oneFriend.oneFriendAge" name="age" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-warning focus:ring focus:ring-warning focus:ring-opacity-50">
+    </div>
+
+    <div>
+        <label for="status" class="block text-sm font-medium text-base-content/70">Changer le statut :</label>
+        <select id="status" [(ngModel)]="oneFriend.oneFriendStatus" name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-warning focus:ring focus:ring-warning focus:ring-opacity-50">
+            <option value="Online">En ligne</option>
+            <option value="Offline">Hors ligne</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="bio" class="block text-sm font-medium text-base-content/70">Changer la bio :</label>
+        <textarea id="bio" [(ngModel)]="oneFriend.oneFriendBio" name="bio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-warning focus:ring focus:ring-warning focus:ring-opacity-50"></textarea>
+    </div>
+
+    <div>
+        <label for="imgUrl" class="block text-sm font-medium text-base-content/70">Changer l'URL de l'image :</label>
+        <input type="text" id="imgUrl" [(ngModel)]="oneFriend.oneFriendImgUrl" name="imgUrl" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-warning focus:ring focus:ring-warning focus:ring-opacity-50">
+    </div>
+</form>
+
+

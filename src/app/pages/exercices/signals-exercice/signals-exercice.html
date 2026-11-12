@@ -1,0 +1,138 @@
+<div class="mx-auto max-w-4xl p-4 sm:p-6">
+    <h1 class="mb-5 text-2xl font-bold">Mon panier</h1>
+
+    <div class="grid items-start gap-5 md:grid-cols-2">
+        <form
+        class="space-y-5 rounded-box border border-base-300 bg-base-100 p-5"
+        aria-labelledby="cart-options"
+        >
+        <h2 id="cart-options" class="text-lg font-semibold">Options du panier</h2>
+
+        <fieldset>
+            <legend class="mb-2 font-medium">Quantité</legend>
+
+            <div class="join">
+            <button
+                type="button"
+                class="btn join-item"
+                aria-label="Diminuer la quantité"
+                (click)="decrementQuantity()"
+                [disabled]="quantity() === 0"
+            >
+                −
+            </button>
+
+            <span class="join-item grid min-w-12 place-items-center bg-base-200 px-3">
+                {{ quantity() }}
+            </span>
+
+            <button
+                type="button"
+                class="btn join-item"
+                aria-label="Augmenter la quantité"
+                (click)="incrementQuantity()"
+            >
+                +
+            </button>
+            </div>
+
+            <p class="mt-2 text-sm">Prix unitaire : {{ unitPrice() }} €</p>
+        </fieldset>
+
+        <fieldset>
+            <legend class="mb-2 font-medium">Remise</legend>
+
+            <div class="flex flex-wrap gap-2">
+            <button
+                type="button"
+                class="btn btn-sm"
+                (click)="setDiscount(0)"
+                [class.btn-primary]="discountPercent() === 0"
+                [class.btn-outline]="discountPercent() !== 0"
+                [attr.aria-pressed]="discountPercent() === 0"
+            >
+                0 %
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-sm"
+                (click)="setDiscount(10)"
+                [class.btn-primary]="discountPercent() === 10"
+                [class.btn-outline]="discountPercent() !== 10"
+                [attr.aria-pressed]="discountPercent() === 10"
+            >
+                −10 %
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-sm"
+                (click)="setDiscount(20)"
+                [class.btn-primary]="discountPercent() === 20"
+                [class.btn-outline]="discountPercent() !== 20"
+                [attr.aria-pressed]="discountPercent() === 20"
+            >
+                −20 %
+            </button>
+            </div>
+        </fieldset>
+
+        <label class="flex cursor-pointer items-center gap-3">
+            <input
+            type="checkbox"
+            class="checkbox checkbox-primary"
+            [checked]="isExpressShipping()"
+            (change)="toggleExpressShipping()"
+            />
+            Livraison express
+        </label>
+
+        <button type="button" class="btn btn-ghost btn-sm" (click)="resetCart()">
+            Réinitialiser le panier
+        </button>
+        </form>
+
+        <section
+        class="card border border-base-300 bg-base-100 shadow-sm"
+        aria-labelledby="cart-summary"
+        >
+            <div class="card-body gap-4">
+                <h2 id="cart-summary" class="card-title">Récapitulatif</h2>
+
+                <dl class="space-y-3">
+                    <div class="flex justify-between gap-4">
+                        <dt>Sous-total</dt>
+                        <dd>{{ subtotal() }} €</dd>
+                    </div>
+
+                    <div class="flex justify-between gap-4">
+                        <dt>Remise</dt>
+                        <dd>{{ discountAmount() }} €</dd>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <dt>Livraison</dt>
+                        <dd class="ml-auto flex items-center gap-2">
+                            {{ shippingFee() }} €
+                            @if (quantity() > 0 && shippingFee() === 0) {
+                                <span class="badge badge-success badge-sm">Offert</span>
+                            } @else if (quantity() > 0 && !isExpressShipping() && subtotal() < 100) {
+                                <span class="badge badge-outline badge-sm">
+                                Encore {{ 100 - subtotal() }} €
+                                </span>
+                            }
+                        </dd>
+                    </div>
+
+                    <div
+                        class="flex justify-between gap-4 border-t border-base-300 pt-3 text-xl font-bold"
+                    >
+                        <dt>Total</dt>
+                        <dd aria-live="polite">{{ total() }} €</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+    </div>
+</div>

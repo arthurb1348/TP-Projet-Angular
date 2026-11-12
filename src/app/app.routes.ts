@@ -63,6 +63,10 @@ export const routes: Routes = [
         path: 'exercice-dynamic-styling',
         loadComponent: () => import('./pages/exercices/dynamic-styling/dynamic-styling').then((m) => m.DynamicStyling),
     },
+    {
+        path: 'signals-exercice',
+        loadComponent: () => import('./pages/exercices/signals-exercice/signals-exercice').then((m) => m.SignalsExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

@@ -46,12 +46,24 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/exercices/event-binding-exercice/event-binding-exercice').then((m) => m.EventBindingExercice),
     },
     {
+        path: 'exercice-conditional-rendering',
+        loadComponent: () => import('./pages/exercices/conditional-rendering-exercice/conditional-rendering-exercice').then((m) => m.ConditionalRenderingExercice),
+    },
+    {
         path: 'correction-text-interpolation',
         loadComponent: () => import('./pages/corrections/text-interpolation-exercice/text-interpolation-exercice').then((m) => m.TextInterpolationExercice),
     },
     {
         path: 'correction-property-binding',
         loadComponent: () => import('./pages/corrections/attributes-binding-exercice/attributes-binding-exercice').then((m) => m.AttributesBindingExercice),
+    },
+    {
+        path: 'correction-event-binding',
+        loadComponent: () => import('./pages/corrections/event-binding/event-binding').then((m) => m.EventBinding),
+    },
+    {
+        path: 'correction-conditional-rendering',
+        loadComponent: () => import('./pages/corrections/conditional-rendering/conditional-rendering').then((m) => m.ConditionalRendering),
     },
     //! ---------- Le système page Not Found ---------------------------------------------------------------------
     // Dans Angular il faut placer à la fin le path:'**'

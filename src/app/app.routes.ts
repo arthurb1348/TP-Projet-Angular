@@ -84,6 +84,10 @@ export const routes: Routes = [
         path: 'correction-conditional-rendering',
         loadComponent: () => import('./pages/corrections/conditional-rendering/conditional-rendering').then((m) => m.ConditionalRendering),
     },
+    {
+        path: 'correction-dynamic-styling',
+        loadComponent: () => import('./pages/corrections/dynamic-styling-exercice/dynamic-styling-exercice').then((m) => m.DynamicStylingExercice),
+    },
     //! ---------- Le système page Not Found ---------------------------------------------------------------------
     // Dans Angular il faut placer à la fin le path:'**'
     // ! check la doc si ya meilleure manière de faire ou plus simple ? aller explorer analog ?

@@ -1,0 +1,94 @@
+<div id="one-friend-card" class="container mx-auto p-4">
+  <!-- 🟩 Grid responsive -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <!-- 🟦 Carte Ami -->
+    <div class="card bg-base-200 shadow-xl" [class]="{oldman:oneFriendAge>=30}">
+      <figure>
+        <img [src]="oneFriendImgUrl" [alt]="oneFriendName" class="object-cover w-full h-48 rounded-t-xl" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title text-primary">
+          {{ oneFriendName }}
+        </h2>
+
+        <p [style]="{color: oneFriendStatus==='Offline' ? 'red':'green' }" class="text-sm">
+          <span class="font-bold">Status :</span>
+          {{ getOneFriendStatus() }}
+        </p>
+        <p class="text-sm">
+          <span class="font-bold">Âge :</span>
+          {{ oneFriendAge }}
+        </p>
+        <p class="text-sm">
+          <span class="font-bold">Bio :</span>
+          {{ oneFriendBio }}
+        </p>
+        <p class="text-sm">
+          <span class="font-bold">Réputation :</span>
+          {{ 1 === 1 ? 'Ringard' : 'Cool' }}
+        </p>
+      </div>
+    </div>
+
+    <!-- 🟧 Formulaire d’édition -->
+    <div class="card bg-base-200 shadow-xl sm:col-span-1 md:col-span-2">
+      <div class="card-body">
+        <h2 class="card-title text-primary">
+          Éditer les informations de {{ oneFriendName }}
+        </h2>
+
+        <form>
+          <!-- Nom -->
+          <div class="form-control w-full mb-4">
+            <label class="label">
+              <span class="label-text">Nom</span>
+            </label>
+            <input type="text" placeholder="Nom" class="input input-bordered w-full" [(ngModel)]="oneFriendName"
+              name="friendName" />
+          </div>
+
+          <!-- Âge -->
+          <div class="form-control w-full mb-4">
+            <label class="label">
+              <span class="label-text">Âge</span>
+            </label>
+            <input type="number" placeholder="Âge" class="input input-bordered w-full" [(ngModel)]="oneFriendAge"
+              name="friendAge" />
+          </div>
+
+          <!-- Status -->
+          <div class="form-control w-full mb-4">
+            <label class="label">
+              <span class="label-text">Status</span>
+            </label>
+            <input type="text" placeholder="Status" class="input input-bordered w-full" [(ngModel)]="oneFriendStatus"
+              name="friendStatus" />
+          </div>
+
+          <!-- Bio -->
+          <div class="form-control w-full mb-4">
+            <label class="label">
+              <span class="label-text">Bio</span>
+            </label>
+            <textarea placeholder="Bio" class="textarea textarea-bordered h-24 w-full" [(ngModel)]="oneFriendBio"
+              name="friendBio"></textarea>
+          </div>
+
+          <!-- Image -->
+          <div class="form-control w-full mb-4">
+            <label class="label">
+              <span class="label-text">Image (URL)</span>
+            </label>
+            <input type="text" placeholder="URL de l'image" class="input input-bordered w-full"
+              [(ngModel)]="oneFriendImgUrl" name="friendImgUrl" />
+          </div>
+
+          <div class="flex justify-end space-x-2 mt-6">
+            <button type="reset" class="btn btn-secondary">Annuler</button>
+            <button type="submit" class="btn btn-primary">Sauvegarder</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

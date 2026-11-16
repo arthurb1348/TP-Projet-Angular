@@ -46,6 +46,10 @@ export const routes: Routes = [
         path:'dynamic-styling-lesson',
         loadComponent:()=>import('./pages/lessons/dynamic-styling-lesson/dynamic-styling-lesson').then(m=>m.DynamicStylingLesson)
     },
+    {
+        path:'observables-lesson',
+        loadComponent:()=>import('./pages/lessons/observables-lesson/observables-lesson').then(m=>m.ObservablesLesson)
+    },
 
     {
         path: 'exercice-text-interpolation',

@@ -88,6 +88,10 @@ export const routes: Routes = [
         path: 'correction-dynamic-styling',
         loadComponent: () => import('./pages/corrections/dynamic-styling-exercice/dynamic-styling-exercice').then((m) => m.DynamicStylingExercice),
     },
+    {
+        path: 'correction-signals',
+        loadComponent: () => import('./pages/corrections/signals-exercice/signals-exercice').then((m) => m.SignalsExercice),
+    },
     //! ---------- Le système page Not Found ---------------------------------------------------------------------
     // Dans Angular il faut placer à la fin le path:'**'
     // ! check la doc si ya meilleure manière de faire ou plus simple ? aller explorer analog ?

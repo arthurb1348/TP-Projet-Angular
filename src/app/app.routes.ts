@@ -75,6 +75,10 @@ export const routes: Routes = [
         path: 'signals-exercice',
         loadComponent: () => import('./pages/exercices/signals-exercice/signals-exercice').then((m) => m.SignalsExercice),
     },
+    {
+        path: 'observables-simple-exercice',
+        loadComponent: () => import('./pages/exercices/observables-simple-exercice/observables-simple-exercice').then((m) => m.ObservablesSimpleExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

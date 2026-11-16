@@ -1,0 +1,21 @@
+<section>
+  <h2>Générateur de nombres aléatoires</h2>
+
+  <div>
+    <button type="button" (click)="start()">Démarrer</button>
+
+    <button type="button" (click)="pauseResume()">
+      {{ paused() ? 'Reprendre' : 'Pause' }}
+    </button>
+
+    <button type="button" (click)="stop()">Arrêter</button>
+  </div>
+
+  <ul>
+    @for (number of numbers(); track $index) {
+      <li>{{ number }}</li>
+    } @empty {
+      <li>Aucun nombre généré pour l'instant.</li>
+    }
+  </ul>
+</section>

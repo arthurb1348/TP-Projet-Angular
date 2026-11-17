@@ -83,6 +83,10 @@ export const routes: Routes = [
         path: 'observables-simple-exercice',
         loadComponent: () => import('./pages/exercices/observables-simple-exercice/observables-simple-exercice').then((m) => m.ObservablesSimpleExercice),
     },
+    {
+        path: 'observables-advanced-exercice',
+        loadComponent: () => import('./pages/exercices/observables-advanced-exercice/observables-advanced-exercice').then((m) => m.ObservablesAdvancedExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

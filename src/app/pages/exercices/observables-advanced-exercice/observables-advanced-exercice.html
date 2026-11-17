@@ -1,0 +1,64 @@
+<section class="mx-auto max-w-2xl p-4 sm:p-6">
+  <div class="card border border-base-300 bg-base-100 shadow-md">
+    <div class="card-body gap-5 p-5 sm:p-8">
+      <h2 class="card-title text-2xl">Générateur de nombres</h2>
+
+      <div class="grid gap-2 sm:grid-cols-3">
+        <button type="button" class="btn btn-primary" (click)="start()">
+          Démarrer
+        </button>
+
+        <button type="button" class="btn btn-outline" (click)="pauseResume()">
+          {{ paused() ? 'Reprendre' : 'Pause' }}
+        </button>
+
+        <button type="button" class="btn btn-outline btn-error" (click)="stop()">
+          Arrêter
+        </button>
+      </div>
+
+      <label class="flex cursor-pointer items-center justify-between gap-3 rounded-box bg-base-200 p-4">
+        <span class="font-medium">Nombres pairs uniquement</span>
+        <input
+          type="checkbox"
+          name="filterEven"
+          class="toggle toggle-primary"
+          [(ngModel)]="filterEven"
+        />
+      </label>
+
+      <div>
+        <div class="mb-3 flex items-center justify-between gap-2">
+          <h3 class="font-semibold">Historique</h3>
+          <span class="badge badge-neutral tabular-nums">
+            {{ numbers().length }} / 10
+          </span>
+        </div>
+
+        <ol role="list" class="space-y-2">
+          @for (number of numbers(); track $index) {
+            <li
+              class="flex items-center justify-between gap-3 rounded-box border-l-4 px-4 py-2"
+              [class]="number.value % 2 === 0
+                ? 'border-success bg-success/10'
+                : 'border-warning bg-warning/10'"
+            >
+              <span class="badge badge-outline gap-2">
+                <strong class="font-mono">{{ number.value }}</strong>
+                {{ number.label }}
+              </span>
+
+              <span class="text-sm">
+                {{ number.value % 2 === 0 ? 'Pair' : 'Impair' }}
+              </span>
+            </li>
+          } @empty {
+            <li class="rounded-box border border-dashed border-base-300 p-4 text-center text-sm">
+              Aucun nombre généré pour l'instant.
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

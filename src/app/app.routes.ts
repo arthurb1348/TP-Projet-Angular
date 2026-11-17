@@ -50,6 +50,10 @@ export const routes: Routes = [
         path:'observables-lesson',
         loadComponent:()=>import('./pages/lessons/observables-lesson/observables-lesson').then(m=>m.ObservablesLesson)
     },
+    {
+        path:'http-client-lesson',
+        loadComponent:()=>import('./pages/lessons/http-client-lesson/http-client-lesson').then(m=>m.HttpClientLesson)
+    },
 
     {
         path: 'exercice-text-interpolation',
@@ -107,6 +111,14 @@ export const routes: Routes = [
     {
         path: 'correction-signals-form',
         loadComponent: () => import('./pages/corrections/signals-form-exercice/signals-form-exercice').then((m) => m.SignalsFormExercice),
+    },
+    {
+        path: 'correction-observable-simple',
+        loadComponent: () => import('./pages/corrections/observable-simple-exercice/observable-simple-exercice').then((m) => m.ObservableSimpleExercice),
+    },
+    {
+        path: 'correction-api-httpclient',
+        loadComponent: () => import('./pages/corrections/api-httpclient-exercice/api-httpclient-exercice').then((m) => m.ApiHttpclientExercice),
     },
     //! ---------- Le système page Not Found ---------------------------------------------------------------------
     // Dans Angular il faut placer à la fin le path:'**'

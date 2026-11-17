@@ -1,0 +1,86 @@
+<div class="max-w-6xl mx-auto my-10 p-4 space-y-8">
+
+  <!-- En-tête -->
+  <div class="flex flex-wrap items-center justify-between gap-4 border-b border-base-300 pb-4">
+    <div>
+      <h1 class="text-3xl font-extrabold text-primary">🦖 Digidex — Exercice HttpClient</h1>
+      <p class="text-sm text-base-content/70">
+        Consommation de l'API publique <code>digi-api.com</code> avec <code>HttpClient</code> et les <code>Signals</code>.
+      </p>
+    </div>
+
+    @if (totalPages() > 0) {
+      <div class="badge badge-primary badge-outline font-mono">
+        Page {{ currentPage() + 1 }} / {{ totalPages() }}
+      </div>
+    }
+  </div>
+
+  <!-- État 1 : Chargement -->
+  @if (isLoading()) {
+    <div class="flex flex-col items-center justify-center py-20 gap-3">
+      <span class="loading loading-spinner loading-lg text-primary"></span>
+      <p class="text-sm text-base-content/70">Chargement des Digimon en cours...</p>
+    </div>
+  }
+
+  <!-- État 2 : Erreur -->
+  @else if (errorMessage()) {
+    <div role="alert" class="alert alert-error shadow-md">
+      <span>⚠️ {{ errorMessage() }}</span>
+      <button type="button" class="btn btn-sm btn-ghost" (click)="loadDigimons(currentPage())">
+        Réessayer
+      </button>
+    </div>
+  }
+
+  <!-- État 3 : Affichage des Cards -->
+  @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      @for (digimon of digimons(); track digimon.id) {
+        <div class="card bg-base-100 shadow-md border border-base-300 hover:shadow-xl hover:-translate-y-1 transition-all">
+          <figure class="bg-white p-4 h-44 flex items-center justify-center">
+            <img
+              [src]="digimon.image"
+              [alt]="digimon.name"
+              loading="lazy"
+              class="max-h-36 w-auto object-contain" />
+          </figure>
+
+          <div class="card-body p-4 items-center text-center">
+            <span class="badge badge-ghost badge-xs font-mono">#{{ digimon.id }}</span>
+            <h2 class="card-title text-base font-bold">{{ digimon.name }}</h2>
+          </div>
+        </div>
+      } @empty {
+        <p class="col-span-full text-center text-base-content/60 py-10">
+          Aucun Digimon trouvé.
+        </p>
+      }
+    </div>
+
+    <!-- Contrôles de pagination -->
+    <div class="flex justify-center items-center gap-4 pt-4">
+      <button
+        type="button"
+        class="btn btn-sm btn-outline"
+        [disabled]="currentPage() === 0"
+        (click)="previousPage()">
+        ← Précédent
+      </button>
+
+      <span class="text-xs font-mono text-base-content/70">
+        Page {{ currentPage() + 1 }} sur {{ totalPages() }}
+      </span>
+
+      <button
+        type="button"
+        class="btn btn-sm btn-primary"
+        [disabled]="currentPage() >= totalPages() - 1"
+        (click)="nextPage()">
+        Suivant →
+      </button>
+    </div>
+  }
+
+</div>

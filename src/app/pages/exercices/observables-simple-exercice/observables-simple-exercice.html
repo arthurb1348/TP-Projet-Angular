@@ -1,21 +1,42 @@
-<section>
-  <h2>Générateur de nombres aléatoires</h2>
+<section class="mx-auto max-w-2xl p-4 sm:p-6">
+  <div class="card border border-base-300 bg-base-100 shadow-md">
+    <div class="card-body gap-6 p-5 sm:p-8">
+      <h2 class="card-title text-2xl">Générateur de nombres</h2>
 
-  <div>
-    <button type="button" (click)="start()">Démarrer</button>
+      <div class="grid gap-2 sm:grid-cols-3">
+        <button type="button" class="btn btn-primary" (click)="start()">
+          Démarrer
+        </button>
 
-    <button type="button" (click)="pauseResume()">
-      {{ paused() ? 'Reprendre' : 'Pause' }}
-    </button>
+        <button type="button" class="btn btn-outline" (click)="pauseResume()">
+          {{ paused() ? 'Reprendre' : 'Pause' }}
+        </button>
 
-    <button type="button" (click)="stop()">Arrêter</button>
+        <button type="button" class="btn btn-outline btn-error" (click)="stop()">
+          Arrêter
+        </button>
+      </div>
+
+      <div class="rounded-box bg-base-200 p-4">
+        <div class="mb-3 flex items-center justify-between gap-2">
+          <h3 class="font-semibold">Nombres générés</h3>
+          <span class="badge badge-neutral tabular-nums">
+            {{ numbers().length }}
+          </span>
+        </div>
+
+        <ul role="list" class="flex flex-wrap gap-2">
+          @for (number of numbers(); track $index) {
+            <li class="badge badge-lg badge-primary badge-outline min-w-12 font-mono">
+              {{ number }}
+            </li>
+          } @empty {
+            <li class="w-full rounded-box border border-dashed border-base-300 p-4 text-center text-sm">
+              Aucun nombre généré pour l'instant.
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
   </div>
-
-  <ul>
-    @for (number of numbers(); track $index) {
-      <li>{{ number }}</li>
-    } @empty {
-      <li>Aucun nombre généré pour l'instant.</li>
-    }
-  </ul>
 </section>

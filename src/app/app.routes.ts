@@ -95,6 +95,10 @@ export const routes: Routes = [
         path: 'observables-advanced-exercice',
         loadComponent: () => import('./pages/exercices/observables-advanced-exercice/observables-advanced-exercice').then((m) => m.ObservablesAdvancedExercice),
     },
+    {
+        path: 'meteo-api-exercice',
+        loadComponent: () => import('./pages/exercices/meteo-api-exercice/meteo-api-exercice').then((m) => m.MeteoApiExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

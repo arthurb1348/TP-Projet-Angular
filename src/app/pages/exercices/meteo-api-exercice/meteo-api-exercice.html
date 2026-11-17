@@ -1,0 +1,34 @@
+<section class="mx-auto max-w-lg p-4 sm:p-6">
+  <h2 class="mb-4 text-2xl font-bold">Météo actuelle</h2>
+
+  @let meteo = meteoData();
+  @if (isLoading()) {
+    <div class="flex items-center gap-3 py-4" role="status">
+      <span class="loading loading-spinner" aria-hidden="true"></span>
+      <span>Chargement de la météo…</span>
+    </div>
+  } @else if (meteo) {
+    <div class="card border border-base-300 bg-base-100 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">{{ meteo.city_info.name }}</h3>
+        <p>Altitude {{ meteo.city_info.elevation }} m</p>
+
+        <div class="mt-2 flex items-center gap-3">
+          <img
+            [src]="meteo.current_condition.icon"
+            alt="Conditions météo actuelles"
+            width="64"
+            height="64"
+            class="size-16 object-contain"
+          />
+
+          <span class="text-4xl font-semibold tabular-nums">
+            {{ meteo.current_condition.tmp }} °C
+          </span>
+        </div>
+      </div>
+    </div>
+  } @else if (errorMessage(); as error) {
+    <div class="alert alert-error" role="alert">{{ error }}</div>
+  }
+</section>

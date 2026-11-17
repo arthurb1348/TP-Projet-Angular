@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, signal, type OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, computed, signal, type OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';
 
@@ -18,6 +18,32 @@ export class MeteoApiExercice implements OnInit {
   readonly meteoData = signal<MeteoResponse | null>(null);
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
+
+  readonly forecastDays = computed(() => {
+    const meteo = this.meteoData();
+    if (!meteo) return [];
+
+    return [
+      meteo.fcst_day_0,
+      meteo.fcst_day_1,
+      meteo.fcst_day_2,
+      meteo.fcst_day_3,
+      meteo.fcst_day_4,
+    ];
+  });
+
+  searchCity(event: Event, cityName: string): void {
+    event.preventDefault();
+
+    const city = cityName.trim().toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-');
+
+    if (!city || this.isLoading()) return;
+
+    this.loadMeteo(city);
+  }
 
   ngOnInit(): void {
     this.loadMeteo('toulouse');

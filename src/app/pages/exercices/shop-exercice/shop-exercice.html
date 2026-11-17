@@ -1,0 +1,128 @@
+<section class="mx-auto max-w-5xl p-4">
+    <h1 class="mb-5 text-2xl font-bold">Boutique ADRAR</h1>
+
+    <div class="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <section aria-labelledby="catalogue-title">
+            <h2 id="catalogue-title" class="mb-3 text-lg font-semibold">Catalogue</h2>
+
+            <div class="space-y-3">
+                @for (product of products; track product.id) {
+                @let stock = cartService.remainingStock(product);
+
+                <article class="card border border-base-300 bg-base-100">
+                    <div class="card-body gap-2 p-4">
+                        <h3 class="card-title">
+                            <span aria-hidden="true">{{ product.icon }}</span>
+                            {{ product.name }}
+                        </h3>
+                        <p>{{ euros.format(product.price) }} · Stock disponible {{ stock }}</p>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-sm self-start"
+                            [disabled]="stock === 0"
+                            (click)="cartService.addProduct(product)"
+                        >
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </article>
+                }
+            </div>
+        </section>
+
+        <section class="card border border-base-300 bg-base-100" aria-labelledby="cart-title">
+            <div class="card-body gap-4 p-4">
+                <div class="flex items-center justify-between gap-2">
+                    <h2 id="cart-title" class="card-title">
+                        Panier <span class="badge badge-neutral">{{ cartService.totalQuantity() }}</span>
+                    </h2>
+
+                    <button
+                        type="button"
+                        class="btn btn-ghost btn-sm"
+                        [disabled]="cartService.totalQuantity() === 0"
+                        (click)="cartService.clearCart()"
+                    >
+                        Vider
+                    </button>
+                </div>
+
+                @if (cartService.items().length === 0) {
+                    <p>Ton panier est vide.</p>
+                } @else {
+                    <ul role="list" class="space-y-3">
+                        @for (item of cartService.items(); track item.product.id) {
+                        <li class="rounded-box border border-base-300 p-3">
+                            <p class="font-medium">{{ item.product.name }}</p>
+
+                            <div class="mt-2 flex flex-wrap items-center gap-2">
+                                <button
+                                    type="button"
+                                    class="btn btn-sm"
+                                    aria-label="Diminuer la quantité"
+                                    (click)="cartService.updateQuantity(item.product.id, -1)"
+                                >−</button>
+
+                                <span>{{ item.quantity }}</span>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-sm"
+                                    aria-label="Augmenter la quantité"
+                                    [disabled]="cartService.remainingStock(item.product) === 0"
+                                    (click)="cartService.updateQuantity(item.product.id, 1)"
+                                >+</button>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-ghost btn-sm text-error"
+                                    (click)="cartService.removeProduct(item.product.id)"
+                                >Supprimer</button>
+                            </div>
+                        </li>
+                        }
+                    </ul>
+
+                    <form (submit)="submitPromo($event, promoInput.value)">
+                        <label for="cart-promo" class="mb-2 block text-sm font-medium">Code promo</label>
+
+                        <div class="flex gap-2">
+                            <input
+                                #promoInput
+                                id="cart-promo"
+                                type="text"
+                                class="input min-w-0 flex-1"
+                                [value]="cartService.promoCode()"
+                            />
+                            <button type="submit" class="btn btn-outline">Appliquer</button>
+                        </div>
+
+                        @if (cartService.promoCode() && !cartService.promoIsValid()) {
+                            <p class="mt-2 text-sm text-error" role="alert">Code promo invalide.</p>
+                        }
+                    </form>
+
+                    <dl class="space-y-2 border-t border-base-300 pt-3">
+                        <div class="flex justify-between gap-3">
+                            <dt>Sous-total</dt>
+                            <dd>{{ euros.format(cartService.subtotal()) }}</dd>
+                        </div>
+
+                        @if (cartService.promoIsValid()) {
+                            <div class="flex justify-between gap-3">
+                                <dt>Remise ADRAR20</dt>
+                                <dd>−{{ euros.format(cartService.discount()) }}</dd>
+                            </div>
+                        }
+
+                        <div class="flex justify-between gap-3 font-semibold">
+                            <dt>Total</dt>
+                            <dd>{{ euros.format(cartService.total()) }}</dd>
+                        </div>
+                    </dl>
+                }
+            </div>
+        </section>
+    </div>
+</section>

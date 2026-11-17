@@ -99,6 +99,10 @@ export const routes: Routes = [
         path: 'meteo-api-exercice',
         loadComponent: () => import('./pages/exercices/meteo-api-exercice/meteo-api-exercice').then((m) => m.MeteoApiExercice),
     },
+    {
+        path: 'shop-exercice',
+        loadComponent: () => import('./pages/exercices/shop-exercice/shop-exercice').then((m) => m.ShopExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

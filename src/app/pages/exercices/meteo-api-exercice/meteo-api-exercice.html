@@ -1,6 +1,25 @@
 <section class="mx-auto max-w-lg p-4 sm:p-6">
   <h2 class="mb-4 text-2xl font-bold">Météo actuelle</h2>
 
+  <form class="mb-5" (submit)="searchCity($event, cityInput.value)">
+    <label for="weather-city" class="mb-2 block text-sm font-medium">Ville</label>
+
+    <div class="flex gap-2">
+      <input
+        #cityInput
+        id="weather-city"
+        type="search"
+        class="input min-w-0 flex-1"
+        value="Toulouse"
+        required
+      />
+
+      <button type="submit" class="btn btn-primary" [disabled]="isLoading()">
+        Rechercher
+      </button>
+    </div>
+  </form>
+
   @let meteo = meteoData();
   @if (isLoading()) {
     <div class="flex items-center gap-3 py-4" role="status">
@@ -28,6 +47,26 @@
         </div>
       </div>
     </div>
+    <section class="mt-5" aria-labelledby="forecast-heading">
+      <h3 id="forecast-heading" class="mb-3 text-lg font-semibold">
+        Prévisions sur 5 jours
+      </h3>
+
+      <ul role="list" class="grid grid-cols-2 gap-2 sm:grid-cols-5">
+        @for (day of forecastDays(); track day.date) {
+          <li class="flex flex-col items-center gap-1 rounded-box border border-base-300 bg-base-100 p-2 text-center">
+            <span class="text-sm font-semibold">{{ day.day_short }}</span>
+            <img [src]="day.icon" [alt]="day.condition" width="40" height="40" />
+
+            <div class="whitespace-nowrap text-xs tabular-nums">
+              <span class="sr-only">Minimale </span>{{ day.tmin }} °
+              <span aria-hidden="true"> / </span>
+              <span class="sr-only">Maximale </span>{{ day.tmax }} °
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
   } @else if (errorMessage(); as error) {
     <div class="alert alert-error" role="alert">{{ error }}</div>
   }

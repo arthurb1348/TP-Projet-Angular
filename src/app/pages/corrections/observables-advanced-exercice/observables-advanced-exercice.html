@@ -1,0 +1,83 @@
+<div class="p-6 mx-auto max-w-lg space-y-6">
+  <h1 class="text-3xl font-bold text-center text-primary">
+    Générateur de Nombres Aléatoires
+  </h1>
+
+  <!-- Panneau de contrôle -->
+  <div class="card bg-base-100 shadow-xl border border-base-300">
+    <div class="card-body p-6 space-y-4">
+      <div class="flex flex-wrap justify-center gap-3">
+        <button
+          type="button"
+          class="btn btn-success"
+          [disabled]="isRunning() && !paused()"
+          (click)="start()">
+          Démarrer
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-warning"
+          [disabled]="!isRunning()"
+          (click)="pauseResume()">
+          {{ paused() ? 'Reprendre' : 'Pause' }}
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-error"
+          [disabled]="!isRunning() && numbers().length === 0"
+          (click)="stop()">
+          Arrêter
+        </button>
+      </div>
+
+      <div class="form-control flex items-center pt-2 border-t border-base-200">
+        <label for="filterSwitch" class="label cursor-pointer gap-3">
+          <span class="label-text text-sm font-medium">
+            Afficher uniquement les nombres pairs
+          </span>
+          <input
+            id="filterSwitch"
+            type="checkbox"
+            class="toggle toggle-primary"
+            [checked]="filterEven()"
+            (change)="toggleFilter($event)" />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Historique -->
+  <div class="card bg-base-100 shadow-xl border border-base-300">
+    <div class="card-body p-5 space-y-3">
+      <div class="flex items-center justify-between">
+        <h2 class="card-title text-secondary text-xl">Historique des Nombres</h2>
+        <span class="badge badge-outline font-mono text-xs">
+          {{ numbers().length }} / 10
+        </span>
+      </div>
+
+      <ul class="space-y-2">
+        @for (item of numbers(); track item.id) {
+          <li
+            class="p-3 rounded-lg flex justify-between items-center text-lg font-mono transition-all"
+            [class.bg-primary]="item.value % 2 === 0"
+            [class.text-primary-content]="item.value % 2 === 0"
+            [class.shadow-md]="item.value % 2 === 0"
+            [class.bg-error]="item.value % 2 !== 0"
+            [class.text-error-content]="item.value % 2 !== 0">
+            <strong class="text-xl">{{ item.value }}</strong>
+            <span class="badge badge-lg bg-base-100 text-base-content">
+              {{ item.label }}
+            </span>
+          </li>
+        } @empty {
+          <li class="text-center py-6 text-sm text-base-content/60 border border-dashed border-base-300 rounded-lg">
+            {{ isRunning() ? 'En attente d’un nombre valide...' : 'Cliquez sur Démarrer pour lancer le flux.' }}
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>

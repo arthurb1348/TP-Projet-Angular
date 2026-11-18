@@ -107,6 +107,10 @@ export const routes: Routes = [
         path: 'shop-exercice',
         loadComponent: () => import('./pages/exercices/shop-exercice/shop-exercice').then((m) => m.ShopExercice),
     },
+    {
+        path: 'animal-input-exercice',
+        loadComponent: () => import('./pages/exercices/animal-input-exercice/animal-input-exercice').then((m) => m.AnimalInputExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

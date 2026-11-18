@@ -11,7 +11,7 @@ export interface UserProfile {
   imports: [],
   selector: 'app-user-card-lesson',
   styleUrl: './user-card-lesson.css',
-template: `
+  template: `
     <div class="card bg-base-100 border border-base-300 shadow-md">
       <div class="card-body p-4 flex flex-row items-center justify-between">
         <div>
@@ -28,7 +28,8 @@ template: `
         </div>
       </div>
     </div>
-  `})
+  `
+})
 export class UserCardLesson {
   // 📥 Entrée de données (Property Binding [user]="...")
   user = input.required<UserProfile>();

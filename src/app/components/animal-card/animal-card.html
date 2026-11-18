@@ -1,0 +1,46 @@
+@let adopted = adoption();
+@let energyLevel = energy();
+
+<article
+    class="card border shadow-sm"
+    [class]="adopted ? 'border-base-300 bg-base-200' : 'border-success bg-base-100'"
+>
+    <div class="card-body gap-4 p-5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="card-title">
+                <span aria-hidden="true">{{ speciesEmoji() }}</span>
+                {{ name() }}
+            </h3>
+
+            <span class="badge" [class]="adopted ? 'badge-neutral' : 'badge-success'">
+                {{ adopted ? 'Adopté' : 'À adopter' }}
+            </span>
+        </div>
+
+        <dl class="grid grid-cols-2 gap-4 text-sm">
+            <div>
+                <dt class="font-semibold">Espèce</dt>
+                <dd>{{ species() }}</dd>
+            </div>
+
+            <div>
+                <dt class="font-semibold">Âge</dt>
+                <dd>{{ ageLabel() }}</dd>
+            </div>
+        </dl>
+
+        <div>
+            <div class="mb-2 flex items-center justify-between gap-2 text-sm">
+                <span class="font-semibold">Niveau d’énergie</span>
+                <span>{{ energyLevel }} %</span>
+            </div>
+
+            <progress
+                class="progress progress-primary w-full"
+                [value]="energyLevel"
+                max="100"
+                aria-label="Niveau d’énergie"
+            ></progress>
+        </div>
+    </div>
+</article>

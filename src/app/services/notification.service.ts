@@ -1,55 +1,76 @@
-import { computed, Service, signal } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 
 export interface AppNotification {
   id: number;
   message: string;
-  type: string;
-  read: boolean;
+  type: 'info' | 'success' | 'warning';
   timestamp: string;
+  read: boolean;
 }
 
-@Service()
+@Injectable({
+  providedIn: 'root', // Enregistré globalement comme Singleton dans toute l'application
+})
 export class NotificationService {
-  private nextId = 1;
-  private readonly notificationList = signal<AppNotification[]>([]);
+  // 1. État privé modifiable uniquement par le service
+  private _notifications = signal<AppNotification[]>([
+    {
+      id: 1,
+      message: 'Service NotificationService initialisé avec succès.',
+      type: 'info',
+      timestamp: '09:00',
+      read: false,
+    },
+    {
+      id: 2,
+      message: 'Connexion à l’API ADRAR établie.',
+      type: 'success',
+      timestamp: '09:05',
+      read: true,
+    },
+  ]);
 
-  readonly notifications = this.notificationList.asReadonly();
+  // 2. Exposition publique en lecture seule (empêche la mutation directe depuis les composants)
+  readonly notifications = this._notifications.asReadonly();
 
-  readonly unreadCount = computed(() =>
-    this.notifications().filter((notification) => !notification.read).length
+  // 3. État dérivé calculé automatiquement
+  readonly unreadCount = computed(
+    () => this._notifications().filter((notif) => !notif.read).length
   );
 
-  addNotification(message: string, type: string): void {
-    const notification: AppNotification = {
-        id: this.nextId++,
-        message,
-        type,
-        read: false,
-        timestamp: new Date().toLocaleTimeString('fr-FR', {
-            hour: '2-digit',
-            minute: '2-digit',
-        }),
+  // 4. Méthodes métier centralisées
+  addNotification(message: string, type: 'info' | 'success' | 'warning' = 'info'): void {
+    const trimmed = message.trim();
+    if (!trimmed) return;
+
+    const now = new Date();
+    const time = `${now.getHours().toString().padStart(2, '0')}:${now
+      .getMinutes()
+      .toString()
+      .padStart(2, '0')}`;
+
+    const newNotif: AppNotification = {
+      id: Date.now(),
+      message: trimmed,
+      type,
+      timestamp: time,
+      read: false,
     };
 
-    this.notificationList.update((notifications) => [
-      ...notifications,
-      notification,
-    ]);
+    this._notifications.update((list) => [newNotif, ...list]);
   }
 
   markAllAsRead(): void {
-    this.notificationList.update((notifications) =>
-      notifications.map((notification) => ({ ...notification, read: true }))
+    this._notifications.update((list) =>
+      list.map((notif) => ({ ...notif, read: true }))
     );
-  }
-
-  clearAll(): void {
-    this.notificationList.set([]);
   }
 
   removeNotification(id: number): void {
-    this.notificationList.update((notifications) =>
-      notifications.filter((notification) => notification.id !== id)
-    );
+    this._notifications.update((list) => list.filter((notif) => notif.id !== id));
+  }
+
+  clearAll(): void {
+    this._notifications.set([]);
   }
 }

@@ -111,6 +111,10 @@ export const routes: Routes = [
         path: 'animal-input-exercice',
         loadComponent: () => import('./pages/exercices/animal-input-exercice/animal-input-exercice').then((m) => m.AnimalInputExercice),
     },
+    {
+        path: 'animal-input-output-exercice',
+        loadComponent: () => import('./pages/exercices/animal-input-output-exercice/animal-input-output-exercice').then((m) => m.AnimalInputOutputExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

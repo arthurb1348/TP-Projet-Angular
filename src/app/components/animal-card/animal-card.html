@@ -42,5 +42,34 @@
                 aria-label="Niveau d’énergie"
             ></progress>
         </div>
+        <div class="card-actions flex flex-wrap gap-2">
+            <button
+                type="button"
+                class="btn btn-sm"
+                [class]="adopted ? 'btn-warning btn-outline' : 'btn-primary'"
+                [disabled]="actionsDisabled()"
+                (click)="adoptionToggled.emit()"
+            >
+                {{ adopted ? 'Annuler' : 'Adopter' }}
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-outline btn-sm"
+                [disabled]="actionsDisabled() || adopted"
+                (click)="energyChanged.emit(-10)"
+            >
+                Jouer
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-outline btn-sm"
+                [disabled]="actionsDisabled() || adopted"
+                (click)="energyChanged.emit(20)"
+            >
+                Sieste
+            </button>
+        </div>
     </div>
 </article>

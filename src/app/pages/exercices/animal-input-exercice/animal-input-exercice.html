@@ -3,14 +3,15 @@
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         @for (animal of animals; track animal.id) {
-        <app-animal-card
-            [name]="animal.name"
-            [species]="animal.species"
-            [age]="animal.age"
-            [energy]="animal.energy"
-            [adoption]="animal.adoption"
-        ></app-animal-card>
+            <app-animal-card
+                [name]="animal.name"
+                [species]="animal.species"
+                [age]="animal.age"
+                [energy]="animal.energy"
+                [adoption]="animal.adoption"
+                [actionsDisabled]="true"
+            ></app-animal-card>
         }
-        <app-animal-card name="Pistache" species="Lapin"></app-animal-card>
+        <app-animal-card name="Pistache" species="Lapin" [actionsDisabled]="true"></app-animal-card>
     </div>
 </section>

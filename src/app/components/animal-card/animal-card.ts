@@ -1,4 +1,4 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 
 @Component({
   imports: [],
@@ -13,6 +13,9 @@ export class AnimalCard {
   age = input<number>(1);
   energy = input<number>(50);
   adoption= input<boolean>(false);
+  readonly adoptionToggled = output<void>();
+  readonly energyChanged = output<number>();
+  readonly actionsDisabled = input(false);
 
   readonly speciesEmoji = computed(() => {
     const species = this.species().trim().toLowerCase();

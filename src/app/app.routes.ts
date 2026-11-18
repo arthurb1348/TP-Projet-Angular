@@ -62,6 +62,10 @@ export const routes: Routes = [
         path:'services-injection-lesson',
         loadComponent:()=>import('./pages/lessons/services-injection-lesson/services-injection-lesson').then(m=>m.ServicesInjectionLesson)
     },
+    {
+        path:'component-communication-lesson',
+        loadComponent:()=>import('./pages/lessons/component-communication-lesson/component-communication-lesson').then(m=>m.ComponentCommunicationLesson)
+    },
 
     {
         path: 'exercice-text-interpolation',

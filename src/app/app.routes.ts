@@ -70,6 +70,10 @@ export const routes: Routes = [
         path:'router-lesson',
         loadComponent:()=>import('./pages/lessons/router-lesson/router-lesson').then(m=>m.RouterLesson)
     },
+    {
+        path:'environments-lesson',
+        loadComponent:()=>import('./pages/lessons/environments-lesson/environments-lesson').then(m=>m.EnvironmentsLesson)
+    },
 
     {
         path: 'exercice-text-interpolation',

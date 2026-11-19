@@ -188,6 +188,10 @@ export const routes: Routes = [
         path: 'correction-animal',
         loadComponent: () => import('./pages/corrections/animal-input-output-exercice/animal-input-output-exercice').then((m) => m.AnimalInputOutputExercice),
     },
+    {
+        path: 'correction-firebase',
+        loadComponent: () => import('./pages/corrections/task-list-fb-exercice/task-list-fb-exercice').then((m) => m.TaskListFbExercice),
+    },
 
     {
         path: 'register',

@@ -66,6 +66,10 @@ export const routes: Routes = [
         path:'component-communication-lesson',
         loadComponent:()=>import('./pages/lessons/component-communication-lesson/component-communication-lesson').then(m=>m.ComponentCommunicationLesson)
     },
+    {
+        path:'router-lesson',
+        loadComponent:()=>import('./pages/lessons/router-lesson/router-lesson').then(m=>m.RouterLesson)
+    },
 
     {
         path: 'exercice-text-interpolation',

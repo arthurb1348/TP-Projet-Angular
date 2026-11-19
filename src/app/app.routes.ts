@@ -74,6 +74,10 @@ export const routes: Routes = [
         path:'environments-lesson',
         loadComponent:()=>import('./pages/lessons/environments-lesson/environments-lesson').then(m=>m.EnvironmentsLesson)
     },
+    {
+        path:'firebase-lesson',
+        loadComponent:()=>import('./pages/lessons/firebase-lesson/firebase-lesson').then(m=>m.FirebaseLesson)
+    },
 
     {
         path: 'exercice-text-interpolation',

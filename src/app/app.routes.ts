@@ -131,6 +131,10 @@ export const routes: Routes = [
         path: 'tp-input-output',
         loadComponent: () => import('./pages/exercices/tp-input-output/tp-input-output').then((m) => m.TpInputOutput),
     },
+    {
+        path: 'firebase-exercice',
+        loadComponent: () => import('./pages/exercices/task-list-fb-exercice/task-list-fb-exercice').then((m) => m.TaskListFbExercice),
+    },
 
     {
         path: 'correction-text-interpolation',

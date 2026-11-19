@@ -1,0 +1,82 @@
+<section class="mx-auto max-w-2xl space-y-6 p-4">
+    <h1 class="text-2xl font-bold">Mes tâches</h1>
+
+    <form
+        (ngSubmit)="addTask()"
+        class="flex flex-col gap-3 sm:flex-row sm:items-end"
+    >
+        <div class="flex-1">
+            <label for="new-task-title" class="mb-2 block font-medium">
+                Nouvelle tâche
+            </label>
+
+            <input
+                id="new-task-title"
+                name="newTaskTitle"
+                type="text"
+                class="input w-full"
+                placeholder="Ex. : Réviser les services Angular"
+                [(ngModel)]="newTaskTitle"
+                required
+            />
+        </div>
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!newTaskTitle().trim()"
+        >
+            Ajouter
+        </button>
+    </form>
+
+    <ul class="space-y-3">
+        @for (task of tasks(); track task.id) {
+            <li
+                class="flex flex-col gap-4 rounded-box border border-base-300
+                    p-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+            <div class="min-w-0 space-y-2">
+                <p
+                    class="break-words font-medium"
+                    [class.line-through]="task.status === 'completed'"
+                >
+                    {{ task.title }}
+                </p>
+
+                <span
+                    class="badge"
+                    [class.badge-success]="task.status === 'completed'"
+                    [class.badge-warning]="task.status === 'pending'"
+                >
+                    {{ task.status === 'completed' ? 'Terminée' : 'En attente' }}
+                </span>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+                <button
+                    type="button"
+                    class="btn btn-sm btn-outline"
+                    (click)="toggleStatus(task)"
+                >
+                    {{ task.status === 'completed' ? 'Remettre en attente' : 'Terminer' }}
+                </button>
+
+                @if (task.id; as taskId) {
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-error btn-outline"
+                        (click)="deleteTask(taskId)"
+                    >
+                        Supprimer
+                    </button>
+                }
+            </div>
+        </li>
+        } @empty {
+            <li class="rounded-box bg-base-200 p-6 text-center">
+                Aucune tâche pour le moment. Ajoute ta première tâche !
+            </li>
+        }
+    </ul>
+</section>

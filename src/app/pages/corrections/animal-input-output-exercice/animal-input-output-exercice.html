@@ -1,0 +1,42 @@
+<div class="max-w-5xl mx-auto my-10 p-4 space-y-6">
+
+  <!-- En-tête + Compteurs du parent -->
+  <div class="flex flex-wrap items-center justify-between gap-4 border-b border-base-300 pb-4">
+    <div>
+      <h1 class="text-3xl font-extrabold text-primary">🐾 Refuge Interactif — Input &amp; Output</h1>
+      <p class="text-sm text-base-content/70">
+        L'enfant émet des actions avec <code>output()</code>, le parent met à jour l'état global.
+      </p>
+    </div>
+
+    <div class="flex gap-2">
+      <span class="badge badge-primary badge-outline font-bold">
+        À adopter : {{ availableCount() }}
+      </span>
+      <span class="badge badge-success text-white font-bold">
+        Adoptés : {{ adoptedCount() }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Notification affichée par le parent lorsqu'un enfant émet un événement -->
+  @if (lastEventMessage(); as message) {
+    <div role="alert" class="alert alert-info shadow-sm py-2.5 text-xs sm:text-sm">
+      <span>📩 <strong>Réaction du parent :</strong> {{ message }}</span>
+    </div>
+  }
+
+  <!-- Grille des fiches animaux -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    @for (animal of animals(); track animal.id) {
+      <app-animal-card
+        [name]="animal.name"
+        [species]="animal.species"
+        [age]="animal.age"
+        [isAdopted]="animal.isAdopted"
+        (adoptToggle)="onToggleAdopt(animal)"
+        (energyChange)="onEnergyChange(animal, $event)" />
+    }
+  </div>
+
+</div>

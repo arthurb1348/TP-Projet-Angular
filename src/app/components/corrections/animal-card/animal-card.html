@@ -1,0 +1,79 @@
+<div
+  class="card bg-base-100 shadow-md border border-base-300 transition-all h-full"
+  [class.opacity-75]="isAdopted()">
+  <div class="card-body p-5 flex flex-col justify-between space-y-4">
+    <!-- En-tête : Emoji + Nom + Statut d'adoption -->
+    <div class="flex items-start justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-2xl bg-base-200 flex items-center justify-center text-3xl">
+          {{ speciesInfo().emoji }}
+        </div>
+        <div>
+          <h3 class="font-extrabold text-lg text-base-content leading-tight">
+            {{ name() }}
+          </h3>
+          <span class="badge badge-xs font-semibold mt-1" [class]="speciesInfo().badge">
+            {{ speciesInfo().label }}
+          </span>
+        </div>
+      </div>
+
+      @if (isAdopted()) {
+        <span class="badge badge-success badge-sm text-white font-bold">Adopté ❤️</span>
+      } @else {
+        <span class="badge badge-outline badge-primary badge-sm font-semibold">À adopter</span>
+      }
+    </div>
+
+    <!-- Informations & Jauge d'énergie -->
+    <div class="space-y-3 pt-2 border-t border-base-200 text-xs">
+      <div class="flex justify-between items-center">
+        <span class="text-base-content/70">Âge :</span>
+        <span class="font-bold text-base-content">{{ ageLabel() }}</span>
+      </div>
+
+      <div class="space-y-1">
+        <div class="flex justify-between font-mono">
+          <span class="text-base-content/70">Niveau d'énergie</span>
+          <span class="font-bold">{{ energyLevel() }} %</span>
+        </div>
+        <progress
+          class="progress progress-primary w-full"
+          [value]="energyLevel()"
+          max="100">
+        </progress>
+      </div>
+    </div>
+
+    <!-- Actions de l'enfant qui émettent vers le parent -->
+    <div class="flex items-center justify-between gap-2 pt-3 border-t border-base-200">
+      <div class="join">
+        <button
+          type="button"
+          class="btn btn-xs join-item"
+          title="Jouer (+15 % d'énergie)"
+          [disabled]="isAdopted() || energyLevel() >= 100"
+          (click)="energyChange.emit(15)">
+          🎾 Jouer
+        </button>
+        <button
+          type="button"
+          class="btn btn-xs join-item"
+          title="Faire la sieste (-20 % d'énergie)"
+          [disabled]="isAdopted() || energyLevel() <= 0"
+          (click)="energyChange.emit(-20)">
+          💤 Sieste
+        </button>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-xs"
+        [class.btn-primary]="!isAdopted()"
+        [class.btn-ghost]="isAdopted()"
+        (click)="adoptToggle.emit()">
+        {{ isAdopted() ? 'Annuler' : 'Adopter' }}
+      </button>
+    </div>
+  </div>
+</div>

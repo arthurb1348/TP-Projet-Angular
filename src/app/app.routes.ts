@@ -168,6 +168,10 @@ export const routes: Routes = [
         path: 'correction-shop',
         loadComponent: () => import('./pages/corrections/shop-cart-service-exercice/shop-cart-service-exercice').then((m) => m.ShopCartServiceExercice),
     },
+    {
+        path: 'correction-animal',
+        loadComponent: () => import('./pages/corrections/animal-input-output-exercice/animal-input-output-exercice').then((m) => m.AnimalInputOutputExercice),
+    },
     //! ---------- Le système page Not Found ---------------------------------------------------------------------
     // Dans Angular il faut placer à la fin le path:'**'
     // ! check la doc si ya meilleure manière de faire ou plus simple ? aller explorer analog ?

@@ -1,0 +1,12 @@
+@let user = activeUser();
+
+<article class="card w-full max-w-sm border border-base-300 bg-base-100 shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title">{{ user.name }}</h2>
+
+        <p>
+            Âge {{ user.age }} {{ user.age >= 2 ? 'ans' : 'an' }}
+        </p>
+    </div>
+</article>
+

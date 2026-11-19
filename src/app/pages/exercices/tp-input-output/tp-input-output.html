@@ -1,0 +1,13 @@
+<section class="mx-auto max-w-3xl p-4">
+    <h1 class="mb-5 text-2xl font-bold">TP Input/Output</h1>
+
+    <div class="grid items-start gap-6 md:grid-cols-2">
+        <app-tp-user-data
+            (userDataEmitUpdate)="currentUser.set($event)"
+        ></app-tp-user-data>
+
+        <app-tp-user-active
+            [activeUser]="currentUser()"
+        ></app-tp-user-active>
+    </div>
+</section>

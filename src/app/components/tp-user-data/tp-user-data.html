@@ -1,0 +1,48 @@
+<form
+    #userForm="ngForm"
+    class="card w-full max-w-sm border border-base-300 bg-base-100 shadow-sm"
+    (ngSubmit)="submitUser()"
+>
+    <div class="card-body gap-4">
+        <h2 class="card-title">Informations utilisateur</h2>
+
+        <div>
+            <label for="tp-user-name" class="mb-2 block font-medium">
+                Nom
+            </label>
+
+            <input
+                id="tp-user-name"
+                name="userName"
+                type="text"
+                class="input w-full"
+                [(ngModel)]="name"
+                required
+            />
+        </div>
+
+        <div>
+            <label for="tp-user-age" class="mb-2 block font-medium">
+                Âge
+            </label>
+
+            <input
+                id="tp-user-age"
+                name="userAge"
+                type="number"
+                class="input w-full"
+                [(ngModel)]="age"
+                min="0"
+                required
+            />
+        </div>
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="userForm.invalid || !name().trim()"
+            >
+            Mettre à jour
+        </button>
+    </div>
+</form>
